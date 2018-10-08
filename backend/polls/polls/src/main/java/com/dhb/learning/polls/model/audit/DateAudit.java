@@ -18,7 +18,7 @@ import java.time.Instant;
         value = {"createdAt", "updatedAt"},
         allowGetters = true
 )
-public class DateAudit implements Serializable{
+public abstract class DateAudit implements Serializable{
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

@@ -9,8 +9,5 @@
         <module name="polls" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="polls" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
