@@ -1,5 +1,6 @@
 package com.dhb.learning.polls.poll.app.model;
 
+import com.dhb.learning.polls.common.audit.UserDateAudit;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name="polls")
-public class Poll {
+public class Poll extends UserDateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,13 @@ public class Poll {
     @Size(max = 140)
     private String question;
 
+
+    @OneToMany(
+            mappedBy = "poll",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
     @Size(min=2 , max=6)
     @Fetch(FetchMode.SELECT)
     @BatchSize(size=30)

@@ -1,4 +1,4 @@
-package com.dhb.learning.polls.auth.server.exception;
+package com.dhb.learning.polls.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,4 +12,5 @@ public class BadRequestException extends RuntimeException{
     public BadRequestException(String message, Throwable cause) {
         super(message, cause);
     }
+
 }

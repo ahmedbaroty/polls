@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <h3>POLLING APP</h3>
+    </div>
+
+    <ul class="list-unstyled components font-italic font-weight-bold">
+      <p>VOTING</p>
+      <li class="active">
+      <li>
+        <a routerLink="poll/list">Poll List</a>
+      </li>
+      <li>
+        <a routerLink="poll/create" *ngIf="isLogin()">Create Poll</a>
+      </li>
+      <li>
+        <a routerLink="about">About</a>
+      </li>
+      <li>
+        <a routerLink="contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>

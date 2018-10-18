@@ -1,0 +1,24 @@
+.first{
+  height: 15px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.second{
+  height: 15px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.red{
+  background: #eb001c;
+}
+
+.green{
+  background: #4CAF50;
+}
+
+.aqua{
+  background: #3498db;
+}

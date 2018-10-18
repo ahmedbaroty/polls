@@ -1,5 +1,7 @@
 package com.dhb.learning.polls.poll.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -16,6 +18,7 @@ public class Choice {
     @NotBlank
     @Size(max = 40)
     private String text;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "poll_id", nullable = false)
@@ -45,6 +48,7 @@ public class Choice {
         this.text = text;
     }
 
+    @JsonIgnore
     public Poll getPoll() {
         return poll;
     }

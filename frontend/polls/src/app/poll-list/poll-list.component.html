@@ -1,0 +1,30 @@
+<div class="loader" *ngIf="loader"></div>
+
+<table class="table" *ngIf="!loader">
+  <tbody>
+  <tr *ngFor="let poll of polls">
+    <td>
+      <div class="card text-center">
+        <div class="card-header">
+          Created By : {{poll.userSummary.username}} - Is Expired : {{poll.expired}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <ul class="list-inline">
+            <li *ngFor="let choice of poll.choices">
+              <p class="card-text">
+                {{choice.text}}
+              </p>
+            </li>
+          </ul>
+          <button (click)="goToPollPage(poll)" class="btn btn-primary">Vote </button>Total votes {{poll.totalVotes}}
+        </div>
+        <div class="card-footer text-muted">
+          <small>Creation Date Time : {{poll.creationDateTime}}</small>
+        </div>
+      </div>
+
+    </td>
+  </tr>
+  </tbody>
+</table>

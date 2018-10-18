@@ -1,0 +1,15 @@
+<div class="loader" *ngIf="loader"></div>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngIf="!loader" novalidate>
+
+  <div class="form-group">
+    <label for="usernameOrEmail">Username Or Email</label>
+    <input type="text" class="form-control" ngModel required #usernameOrEmail="ngModel" name="usernameOrEmail" id="usernameOrEmail" placeholder="Enter username or email">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" ngModel required #password="ngModel" name="password" id="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>

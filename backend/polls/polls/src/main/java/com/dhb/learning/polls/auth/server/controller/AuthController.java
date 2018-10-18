@@ -1,6 +1,6 @@
 package com.dhb.learning.polls.auth.server.controller;
 
-import com.dhb.learning.polls.auth.server.exception.AppException;
+import com.dhb.learning.polls.common.exception.AppException;
 import com.dhb.learning.polls.auth.server.payload.ApiResponse;
 import com.dhb.learning.polls.auth.server.payload.JwtAuthenticationResponse;
 import com.dhb.learning.polls.auth.server.repository.RoleRepository;

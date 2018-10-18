@@ -1,0 +1,7 @@
+
+<div *ngFor="let choice of poll.choices">
+  <div class="first">
+    <div class="second {{getClass(choice)}}" [ngStyle]="{'width.%':getRatio(choice)}"></div>{{choice.text}}
+  </div>
+
+</div>
