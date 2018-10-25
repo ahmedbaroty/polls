@@ -20,7 +20,8 @@ export class ApiService {
     userVotes: `${this.root}/api/users/votes?username=`,
     checkEmailAvailability: `${this.root}/api/user/checkEmailAvailability?email=`,
     checkUsernameAvailability: `${this.root}/api/user/checkUsernameAvailability?username=`,
-    castVote: `${this.root}/api/polls/4/votes`
+    castVote: `${this.root}/api/polls/`,
+    pollById:`${this.root}/api/polls/`
   };
   constructor(private http:HttpClient , private authService: AuthService) { }
 
@@ -68,8 +69,13 @@ export class ApiService {
       {headers:{Authorization: this.authService.getToken()}});
   }
 
-  createCastVote(voteRequest){
-    return this.http.post(this.api.castVote,voteRequest,
+  createCastVote(voteRequest , pollId){
+    return this.http.post(this.api.castVote+pollId+'/votes',voteRequest,
       {headers:{Authorization: this.authService.getToken()}});
   }
+
+  getPollById(pollId){
+    return this.http.get(this.api.pollById+pollId , {headers:{Authorization: this.authService.getToken()}})
+  }
+
 }

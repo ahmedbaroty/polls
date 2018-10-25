@@ -1,18 +1,18 @@
 .first{
-  height: 15px;
+  height: 23px;
   width: 100%;
   background: #ddd;
   border-radius: 10px;
 }
 
 .second{
-  height: 15px;
+  height: 23px;
   width: 100%;
   border-radius: 10px;
 }
 
 .red{
-  background: #eb001c;
+  background: lightcoral;
 }
 
 .green{
@@ -21,4 +21,39 @@
 
 .aqua{
   background: #3498db;
+}
+
+
+.user-summary {
+  margin: 10px auto;
+  cursor: pointer;
+}
+.user-name {
+  margin: 15px 0 0 0;
+  font-style: italic;
+  display: block;
+  font-weight:bold;
+}
+.user-status {
+  font-weight: lighter;
+}
+
+.user-logo{
+  height: 70px;
+  width: 70px;
+  background: yellowgreen;
+  border-radius: 50%;
+  float: left;
+  padding-left: 22px;
+  padding-top: 3px;
+  font-size: 40px;
+  color: white;
+}
+
+.ratio{
+  position: absolute;
+  margin-left: 50%;
+  color: white;
+  font-weight: normal;
+
 }

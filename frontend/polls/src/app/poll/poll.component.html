@@ -1,7 +1,51 @@
+<div class="loader" *ngIf="loader"></div>
 
-<div *ngFor="let choice of poll.choices">
-  <div class="first">
-    <div class="second {{getClass(choice)}}" [ngStyle]="{'width.%':getRatio(choice)}"></div>{{choice.text}}
+<form #f="ngForm" (ngSubmit)="onVote(f)" *ngIf="!loader">
+  <div class="container" style="padding: 10px 0px 0px 0px">
+    <div class="row">
+      <div class="col-12">
+        <div class="user-summary clearfix">
+          <div class="user-logo">
+            <div class="font-weight-bold">
+              {{getUserLogo()}}
+            </div>
+          </div>
+          <div class="user-name">{{poll.userSummary.username}}</div>
+          <div class="user-status">{{poll.userSummary.name}}</div>
+          <div class="user-status">Created At : {{poll.creationDateTime}}</div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <h5>{{poll.question}}  </h5>
+        <small *ngIf="poll.expired"> Expired At : {{poll.expirationDateTime}}</small>
+        <small *ngIf="!poll.expired"> Poll will expired at : {{poll.expirationDateTime}}</small>
+        <small *ngIf="isSelectedChoice()"><br> You Are Already Cast a Vote</small>
+      </div>
+    </div>
+    <br>
+    <div class="row" *ngFor="let choice of poll.choices">
+      <div class="col-3">
+        <input type="radio" [disabled]="isSelectedChoice()" [value]="choice.id" #vote="ngModel" name="vote" [ngModel]="poll.selectedChoice"> {{choice.text}}
+      </div>
+      <div class="col-9">
+        <div class="first">
+          <div class="second {{getClass(choice)}}" [ngStyle]="{'width.%':getRatio(choice)}">
+            <p class="ratio">
+              {{displayRatio(choice)}}%
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <button [disabled]="isSelectedChoice()" class="btn btn-primary">Vote</button>
+        <small>{{" Total Votes : " + poll.totalVotes}}</small>
+      </div>
+    </div>
   </div>
-
-</div>
+</form>

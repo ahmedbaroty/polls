@@ -10,15 +10,17 @@ import {Router} from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private apiService : ApiService , private route: Router) { }
+  constructor(private apiService: ApiService, private route: Router) {
+  }
 
-  loader:Boolean = false;
+  loader: Boolean = false;
+
   ngOnInit() {
   }
 
-  onSubmit(f: NgForm){
+  onSubmit(f: NgForm) {
 
-    if(f.valid){
+    if (f.valid) {
       const signupRequest = {
         name: f.value.name,
         username: f.value.username,
@@ -29,28 +31,21 @@ export class SignupComponent implements OnInit {
       // display loader
       this.loader = true;
 
-      setTimeout(()=>{
-
-        // stop loader
+      this.apiService.register(signupRequest).toPromise().then((signupResponse: any) => {
         this.loader = false;
+        alert(`Register Success :  ${signupResponse.success} \nRegister Message : ${signupResponse.message}\n go to login`);
         this.route.navigate([`login`]);
 
-      } , 3000);
-      /*
-            this.apiService.register(signupRequest).toPromise().then(signupResponse =>{
+      }).catch(error => {
+        this.loader = false;
+        // display alert error
+        alert('ERROR Not Valid form \n' + error.message);
+      });
 
-              // display alert success
-              // go to login page
-            }).catch(error =>{
-
-              // display alert error
-            });
-      */
     }
-    else{
-      alert("Not Valid form");
+    else {
+      alert('Not Valid form');
       // display alert form not valid
-
     }
 
   }

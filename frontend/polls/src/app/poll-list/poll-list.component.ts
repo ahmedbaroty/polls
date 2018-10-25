@@ -17,15 +17,14 @@ export class PollListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getAllPolls().toPromise().then(data => {
-      this.loader = false;
-      this.polls = data;
-    }).catch(error => {
-      this.loader = false;
-      alert(`Error Response : \n ${error.message}`);
-    });
+    if(this.router.url === "/poll/list/createdBy"){
+      this.getCreatedByPolls();
+    }else if(this.router.url === "/poll/list/votedBy"){
+      this.getVotedByPolls();
+    }else{
+      this.getAll();
+    }
   }
-
 
   vote(id) {
     if(this.authService.isAuthorized()){
@@ -36,15 +35,49 @@ export class PollListComponent implements OnInit {
   }
 
   goToPollPage(poll) {
-    if(!poll.expired){
-      if(this.authService.isAuthorized()){
-        this.router.navigate([`poll/${poll.id}`]);
-      } else{
-        alert("You Must Login Before Vote");
-        this.router.navigate([`login`]);
-      }
+    this.router.navigate([`poll/${poll.id}`]);
+  }
+
+  getButtonTitle(expired: boolean) {
+    if(expired){
+      return 'Poll Details'
     }else{
-      alert("This poll is Expired!");
+      return 'Vote'
     }
   }
+
+
+  getAll(){
+    this.apiService.getAllPolls().toPromise().then(data => {
+      this.loader = false;
+      this.polls = data;
+    }).catch(error => {
+      this.loader = false;
+      alert(`Error Response : \n ${error.message}`);
+    });
+  }
+
+  getCreatedByPolls(){
+    this.apiService.getPollCreateBy(this.authService.getUsername()).toPromise().then(data => {
+      this.loader = false;
+      this.polls = data;
+    }).catch(error => {
+      this.loader = false;
+      alert(`Error Response : \n ${error.message}`);
+    });
+  }
+
+  getVotedByPolls(){
+    this.apiService.getUserVotes(this.authService.getUsername()).toPromise().then(data => {
+      this.loader = false;
+      this.polls = data;
+    }).catch(error => {
+      this.loader = false;
+      alert(`Error Response : \n ${error.message}`);
+    });
+
+  }
+
+
+
 }

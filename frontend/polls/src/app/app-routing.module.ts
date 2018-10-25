@@ -15,10 +15,12 @@ const routes: Routes = [
   {path: '' , component: HomeComponent},
   {path: 'me' , component: MeComponent},
   {path: 'poll/list' , component: PollListComponent},
+  {path: 'poll/list/createdBy' , component: PollListComponent},
+  {path: 'poll/list/votedBy' , component: PollListComponent},
   {path: 'poll/create' , component: PollCreationComponent},
   {path: 'login' , component: LoginComponent},
   {path: 'signup' , component: SignupComponent},
-  {path: 'poll/:{id}' , component: PollComponent},
+  {path: 'poll/:id' , component: PollComponent},
   {path: 'contact' , component: ContactComponent},
   {path: 'about' , component: AboutComponent},
   {path: 'help' , component: HelpComponent}

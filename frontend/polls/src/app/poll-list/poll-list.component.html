@@ -9,7 +9,7 @@
           Created By : {{poll.userSummary.username}} - Is Expired : {{poll.expired}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
+          <h5 class="card-title">{{poll.question}}</h5>
           <ul class="list-inline">
             <li *ngFor="let choice of poll.choices">
               <p class="card-text">
@@ -17,7 +17,7 @@
               </p>
             </li>
           </ul>
-          <button (click)="goToPollPage(poll)" class="btn btn-primary">Vote </button>Total votes {{poll.totalVotes}}
+          <button (click)="goToPollPage(poll)" class="btn btn-primary">{{getButtonTitle(poll.expired)}} </button>Total votes {{poll.totalVotes}}
         </div>
         <div class="card-footer text-muted">
           <small>Creation Date Time : {{poll.creationDateTime}}</small>
