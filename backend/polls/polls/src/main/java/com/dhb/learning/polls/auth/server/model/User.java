@@ -3,6 +3,7 @@ package com.dhb.learning.polls.auth.server.model;
 
 import com.dhb.learning.polls.common.audit.DateAudit;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -20,8 +21,7 @@ import java.util.Set;
                 "email"
         })
 })
-public class User extends DateAudit
-{
+public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,7 +50,19 @@ public class User extends DateAudit
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public User() {
+        this.enabled = false;
     }
 
     public User(@NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
@@ -59,6 +71,7 @@ public class User extends DateAudit
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.enabled = false;
     }
 
     public Long getId() {

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body style="text-align: center">
+<h2>Welcome To Polls App Verification Mail</h2>
+<hr>
+<h3 th:text="'Hello' + ${name} +'!'"></h3>
+<h4>
+    <br>
+    <p>Verify your mail to can access the polls app</p>
+    <br>
+    <a th:href="${link}"> Verify Your Mail</a>
+</h4>
+</body>
+</html>

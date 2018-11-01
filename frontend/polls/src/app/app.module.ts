@@ -16,6 +16,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HelpComponent } from './help/help.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { VerifyMailComponent } from './verify-mail/verify-mail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     PollListComponent,
     AboutComponent,
     ContactComponent,
-    HelpComponent
+    HelpComponent,
+    VerifyMailComponent
   ],
   imports: [
     BrowserModule,

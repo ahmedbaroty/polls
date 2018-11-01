@@ -28,14 +28,6 @@
            name="question" #question required ngModel>
   </div>
 
-  <div *ngFor="let i of [1,2,3,4,5,6]">
-    <div class="form-group" *ngIf="i<=numberOfChoices">
-      <label for="{{i}}">Choice {{i}}</label>
-      <input type="text" class="form-control" id="{{i}}" placeholder="Enter choice {{i}}"
-             name="choice{{i}}" required #choice{{i}} [ngModel]="choices[i-1]">
-    </div>
-  </div>
-
   <div class="form-group">
     <label for="numberOfChoices">Number Of Choices</label>
     <select class="form-control" id="numberOfChoices"
@@ -43,6 +35,14 @@
       <option *ngFor="let i of [2,3,4,5,6]" [value]="i">{{i}} Choices
       </option>
     </select>
+  </div>
+
+  <div *ngFor="let i of [1,2,3,4,5,6]">
+    <div class="form-group" *ngIf="i<=numberOfChoices">
+      <label for="{{i}}">Choice {{i}}</label>
+      <input type="text" class="form-control" id="{{i}}" placeholder="Enter choice {{i}}"
+             name="choice{{i}}" required #choice{{i}} [ngModel]="choices[i-1]">
+    </div>
   </div>
 
   <div class="form-group">

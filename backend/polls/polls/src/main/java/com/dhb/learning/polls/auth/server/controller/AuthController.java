@@ -1,15 +1,15 @@
 package com.dhb.learning.polls.auth.server.controller;
 
+import com.dhb.learning.polls.auth.server.SendMailService;
+import com.dhb.learning.polls.auth.server.model.VerificationToken;
+import com.dhb.learning.polls.auth.server.payload.*;
+import com.dhb.learning.polls.auth.server.repository.VerificationTokenRepository;
 import com.dhb.learning.polls.common.exception.AppException;
-import com.dhb.learning.polls.auth.server.payload.ApiResponse;
-import com.dhb.learning.polls.auth.server.payload.JwtAuthenticationResponse;
 import com.dhb.learning.polls.auth.server.repository.RoleRepository;
 import com.dhb.learning.polls.auth.server.repository.UserRepository;
 import com.dhb.learning.polls.auth.server.model.Role;
 import com.dhb.learning.polls.auth.server.model.RoleName;
 import com.dhb.learning.polls.auth.server.model.User;
-import com.dhb.learning.polls.auth.server.payload.LoginRequest;
-import com.dhb.learning.polls.auth.server.payload.SignUpRequest;
 import com.dhb.learning.polls.auth.server.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +44,37 @@ public class AuthController {
 
     @Autowired
     JwtTokenProvider tokenProvider;
+
+    @Autowired
+    SendMailService sendMailService;
+
+
+    @GetMapping("/verify/request/{userId}")
+    public  ResponseEntity<?> sendVerifyMail(@PathVariable  Long userId){
+        User user = userRepository.findById(userId).get();
+        VerificationToken token = new VerificationToken();
+
+        sendMailService.sendMail(user);
+
+       return  ResponseEntity.ok(
+                new ApiResponse(true, "Confirm Email Has been sent"));
+    }
+
+    @GetMapping("/verify/{token}")
+    public  ResponseEntity<?> responseVerifyMail(@PathVariable  String token){
+
+       User user =  sendMailService.verifyConfirmUser(token);
+        if(user!=null){
+            user.setEnabled(true);
+            userRepository.save(user);
+            return  ResponseEntity.ok(
+                    new ApiResponse(true, "Your Email got to login page"));
+        }else{
+            return  ResponseEntity.ok(
+                    new ApiResponse(false, "Not found token"));
+        }
+    }
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticationUser(
@@ -105,8 +136,7 @@ public class AuthController {
                 .buildAndExpand(userResult.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(
-                new ApiResponse(true, "User registered successfully"));
-
+                new SignupResponse(true, "User registered successfully Confirm your Email" , userResult.getId()));
     }
 
     @GetMapping("/find")

@@ -21,9 +21,12 @@ export class ApiService {
     checkEmailAvailability: `${this.root}/api/user/checkEmailAvailability?email=`,
     checkUsernameAvailability: `${this.root}/api/user/checkUsernameAvailability?username=`,
     castVote: `${this.root}/api/polls/`,
-    pollById:`${this.root}/api/polls/`
+    pollById:`${this.root}/api/polls/`,
+    verifyMail:`${this.root}/api/auth/verify/request/`,
+    tokenVerify:`${this.root}/api/auth/verify/`
   };
   constructor(private http:HttpClient , private authService: AuthService) { }
+
 
   register(signupRequest){
     return this.http.post(this.api.register , signupRequest);
@@ -77,5 +80,14 @@ export class ApiService {
   getPollById(pollId){
     return this.http.get(this.api.pollById+pollId , {headers:{Authorization: this.authService.getToken()}})
   }
+
+  sendVerifyMailRequest(userId){
+    return this.http.get(this.api.verifyMail + userId);
+  }
+
+  sendTokenToVerfiyUserTokenRequest(token){
+    return this.http.get(this.api.tokenVerify + token);
+  }
+
 
 }

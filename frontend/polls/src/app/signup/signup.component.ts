@@ -33,8 +33,9 @@ export class SignupComponent implements OnInit {
 
       this.apiService.register(signupRequest).toPromise().then((signupResponse: any) => {
         this.loader = false;
+        console.log(signupResponse);
         alert(`Register Success :  ${signupResponse.success} \nRegister Message : ${signupResponse.message}\n go to login`);
-        this.route.navigate([`login`]);
+        this.route.navigate([`verify/${signupResponse.userId}`]);
 
       }).catch(error => {
         this.loader = false;

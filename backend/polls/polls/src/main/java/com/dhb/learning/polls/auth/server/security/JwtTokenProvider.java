@@ -67,4 +67,18 @@ public class JwtTokenProvider {
         }
         return false;
     }
+
+    public String generateVerifyToken(Long id){
+        Date now = new Date();
+
+        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+
+        return Jwts
+                .builder()
+                .setSubject(Long.toString(id))
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512 , jwtSecret)
+                .compact();
+    }
 }

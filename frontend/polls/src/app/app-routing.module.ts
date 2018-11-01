@@ -10,6 +10,7 @@ import {PollComponent} from './poll/poll.component';
 import {ContactComponent} from './contact/contact.component';
 import {AboutComponent} from './about/about.component';
 import {HelpComponent} from './help/help.component';
+import {VerifyMailComponent} from './verify-mail/verify-mail.component';
 
 const routes: Routes = [
   {path: '' , component: HomeComponent},
@@ -23,7 +24,9 @@ const routes: Routes = [
   {path: 'poll/:id' , component: PollComponent},
   {path: 'contact' , component: ContactComponent},
   {path: 'about' , component: AboutComponent},
-  {path: 'help' , component: HelpComponent}
+  {path: 'help' , component: HelpComponent},
+  {path: 'verify/:id' , component: VerifyMailComponent},
+  {path: 'verify/:token' , component: VerifyMailComponent}
   ];
 
 @NgModule({

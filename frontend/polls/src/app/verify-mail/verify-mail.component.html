@@ -1,0 +1,16 @@
+<div class="loader" *ngIf="loader"></div>
+<br>
+<br>
+<div class="container" *ngIf="!loader">
+  <div class="row" *ngIf="status==='init'">
+    <div class="col-12">
+      <button (click)="sendMail()" class="btn btn-primary btn-block" style="width: 50%;margin: auto"> Send Verify Mail </button>
+    </div>
+  </div>
+  <div class="row" *ngIf="status!=='init'">
+    <div class="col-12">
+      <p (click)="sendMail()" class="btn btn-primary btn-block" style="width: 50%;margin: auto"> Verify your email </p>
+    </div>
+  </div>
+</div>
+
